@@ -2,7 +2,9 @@ TaxIDermy
 -----------------
 a set of scripts compiled by Bryan Wee (1st Aug 2012)
 
+This script produces an artemis readable genbank file that colours CDSs according according to their taxonomic distance from the reference species.
 
+It facilitates annotation of genomic islands or mobile elements by differentiating regions that have different phylogenetic distances from the organism of interest.
 
 Updated: 28th Nov 2012
 
@@ -15,7 +17,7 @@ Requirements
 - local copy of nr
 
 - 1x .faa protein sequence multi fasta file from the genome that you want to analyse with locus tags
-- 1x gbk file of the genome you want to analyse
+- 1x gbk file of the genomic island/region you want to analyse
 
 - 1x gi_taxid_prot.dmp *Note: this file is huge >1GB*
 - 1x nodes.dmp
@@ -61,4 +63,4 @@ For use on a paralell cluster
 
 2. Prior to running blastp, split up the multi fasta (.faa) file (e.g. using genometools: gt splitfasta -numfiles 10 example.faa)
 
-3. Use sample PBS script (included) to run both blastp followed by CDS.IPR.blastp_parser.py
+3. Use sample PBS script (included) to run both blastp followed by CDS.IPR.blastp_parser.py on a cluster
