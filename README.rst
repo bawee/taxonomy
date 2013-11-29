@@ -14,13 +14,13 @@ BioPerl
 Biopython
 local copy of nr
 
-1x .faa protein sequence multi fasta file from the genome that you want to analyse with locus tags
-1x gbk file of the genome you want to analyse
+- 1x .faa protein sequence multi fasta file from the genome that you want to analyse with locus tags
+- 1x gbk file of the genome you want to analyse
 
-1x gi_taxid_prot.dmp *this file is huge >1GB*
-1x nodes.dmp
-1x names.dmp
-1x scientific_names.dmp *this file is derived from names.dmp. See Note 3*
+- 1x gi_taxid_prot.dmp *this file is huge >1GB*
+- 1x nodes.dmp
+- 1x names.dmp
+- 1x scientific_names.dmp *this file is derived from names.dmp. See Note 3*
 
 Note:
 	* The latest version of these files can be downloaded at ftp://ftp.ncbi.nih.gov/pub/taxonomy. nodes.dmp and names.dmp are found within taxdump.tar.gz
