@@ -1,0 +1,16 @@
+#!/bin/bash
+#PBS -A uq-Beatson
+#PBS -N taxid
+#PBS -l select=1:ncpus=4:mem=4g:NodeType=any
+#PBS -l walltime=2:00:00
+#PBS -J 1-5
+
+module load blast+/2.2.28
+
+cd /WORKING/DIR/WITH/ALL/FILES_AND_SCRIPTS/
+
+blastp -query split_multi_fasta.faa.$PBS_ARRAY_INDEX -negative_gilist <genus>.gi_list -db nr -num_threads 4 -outfmt 6 -out $PBS_ARRAY_INDEX.vs.nr.blastp.tab
+
+python CDS.IPR.blastp_parser_v1.py $PBS_ARRAY_INDEX.vs.nr.blastp.tab original_genbank_of_region.gb <taxid_of_reference_strain> taxid_script.colour.$PBS_ARRAY_INDEX.tab
+
+
