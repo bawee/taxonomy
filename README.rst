@@ -23,7 +23,7 @@ Requirements
 - 1x gi_taxid_prot.dmp *Note: this file is huge >1GB*
 - 1x nodes.dmp
 - 1x names.dmp
-- 1x scientific_names.dmp *Note: this file is derived from names.dmp. See Note 3*
+- 1x scientific_names.dmp *Note: this file is derived from names.dmp. See Note 2*
 
 Note:
 	i. The latest version of the .dmp files can be downloaded at ftp://ftp.ncbi.nih.gov/pub/taxonomy. nodes.dmp and names.dmp are found within taxdump.tar.gz
