@@ -33,7 +33,7 @@ Note:
 Instructions
 ===============
 
-1. The first step is to create a list of gi numbers that correspond to sequences in NCBI that belong to the taxons that you do not want to include in the results.  This can be done by using the script retrieve_child_gis.pl "<Node to filter>"  and using the generated file <Taxon>.gi_list in the blastp step in step 2::
+1. The first step is to create a list of gi numbers that correspond to sequences in NCBI that belong to the taxons that you do not want to include in the results. This is us  This can be done by using the script retrieve_child_gis.pl "<Node to filter>"  and using the generated file <Taxon>.gi_list in the blastp step in step 2::
 
 	$ retrieve_child_gis.pl "Pseudomonas"
 	# or 
