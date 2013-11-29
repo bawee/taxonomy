@@ -57,7 +57,7 @@ Note: nr must be in your path. if not, point the -db argument to nr on your comp
 Note: this script calls traverse_taxonomy.pl which must be in the working directory
 
 
-For use on a paralell cluster
+For use on a parallel cluster
 ================================
 
 1. Same as step 1 above.
