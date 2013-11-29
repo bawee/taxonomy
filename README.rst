@@ -23,9 +23,9 @@ Requirements
 - 1x scientific_names.dmp *Note: this file is derived from names.dmp. See Note 3*
 
 Note:
-	* The latest version of the .dmp files can be downloaded at ftp://ftp.ncbi.nih.gov/pub/taxonomy. nodes.dmp and names.dmp are found within taxdump.tar.gz
-	* scientific_names.dmp is made using: `grep "scientific" names.dmp > scientific_names.dmp`
-	* make sure the latest version of nodes.dmp, names.dmp and gi_taxid_prot.dmp are used so to ensure compatibility with blast hits from the latest version of NR.
+	i. The latest version of the .dmp files can be downloaded at ftp://ftp.ncbi.nih.gov/pub/taxonomy. nodes.dmp and names.dmp are found within taxdump.tar.gz
+	ii. scientific_names.dmp is made using: `grep "scientific" names.dmp > scientific_names.dmp`
+	iii. make sure the latest version of nodes.dmp, names.dmp and gi_taxid_prot.dmp are used so to ensure compatibility with blast hits from the latest version of NR.
 
 Instructions
 ===============
