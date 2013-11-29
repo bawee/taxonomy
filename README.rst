@@ -14,6 +14,7 @@ Requirements
 
 - BioPerl
 - Biopython
+- Blast+
 - local copy of nr
 
 - 1x .faa protein sequence multi fasta file from the genome that you want to analyse with locus tags
