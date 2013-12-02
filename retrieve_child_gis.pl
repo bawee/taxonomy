@@ -81,7 +81,7 @@ if (@extant_children)	#checks if @extant_children is filled
 	
 		foreach my $child ( @extant_children )
 		{
-			get_descendents($child->id);
+			get_descendents($child->id); #remove this line if using get_all_Descendents
 			#print "id is ", $child->id, "\n"; # NCBI taxa id
     		#print "rank is ", $child->rank, "\n"; # e.g. species
     		print $child->scientific_name, "\n"; # scientific name
