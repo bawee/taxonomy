@@ -14,6 +14,7 @@ Requirements
 
 - BioPerl
 - Biopython
+- Blast+
 - local copy of nr
 
 - 1x .faa protein sequence multi fasta file from the genome that you want to analyse with locus tags
@@ -22,7 +23,7 @@ Requirements
 - 1x gi_taxid_prot.dmp *Note: this file is huge >1GB*
 - 1x nodes.dmp
 - 1x names.dmp
-- 1x scientific_names.dmp *Note: this file is derived from names.dmp. See Note 3*
+- 1x scientific_names.dmp *Note: this file is derived from names.dmp. See Note 2*
 
 Note:
 	i. The latest version of the .dmp files can be downloaded at ftp://ftp.ncbi.nih.gov/pub/taxonomy. nodes.dmp and names.dmp are found within taxdump.tar.gz
@@ -32,7 +33,7 @@ Note:
 Instructions
 ===============
 
-1. The first step is to create a list of gi numbers that correspond to sequences in NCBI that belong to the taxons that you do not want to include in the results.  This can be done by using the script retrieve_child_gis.pl "<Node to filter>"  and using the generated file <Taxon>.gi_list in the blastp step in step 2::
+1. The first step is to create a list of gi numbers that correspond to sequences in NCBI that belong to the taxons that you do not want to include in the results. This is us  This can be done by using the script retrieve_child_gis.pl "<Node to filter>"  and using the generated file <Taxon>.gi_list in the blastp step in step 2::
 
 	$ retrieve_child_gis.pl "Pseudomonas"
 	# or 
@@ -56,7 +57,7 @@ Note: nr must be in your path. if not, point the -db argument to nr on your comp
 Note: this script calls traverse_taxonomy.pl which must be in the working directory
 
 
-For use on a paralell cluster
+For use on a parallel cluster
 ================================
 
 1. Same as step 1 above.
