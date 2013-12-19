@@ -5,7 +5,8 @@
 #This script takes a query phrase e.g. "Pseudomonas" or "Pseudomonas aeruginosa" or "Pseudomonas aeruginosa UCBP-PA14" and returns all GI numbers associated with ALL taxa beneath the query taxa.
 
 #Requirements:
-# requires an updated copy of nodes.dmp and names.dmp in the working directory
+# 1. requires an updated copy of nodes.dmp AND names.dmp in the working directory
+# 2. also requires gi_taxid_prot.dmp 
 
 use warnings;
 use strict;
