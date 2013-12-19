@@ -1,4 +1,4 @@
-#!/opt/local/bin/perl
+#!/usr/bin/env perl
 #Written by Bryan Wee 1 August 2012
 #updated by BW 2 Dec 2013
 
