@@ -17,8 +17,9 @@ my $species = $ARGV[0] or die "USAGE: retrieve_child_gis.pl <species>\n\nWhere <
 
 my %hash_of_child_taxids; #initialize hash that stores all the taxids
 
-my $idx_dir = './tmp'; #
-system "mkdir tmp"; #create directory for the local taxonomy db
+my $idx_dir = './index_tmp'; #
+system "rm -rf ./index_tmp"; #delete tmp folder
+system "mkdir index_tmp"; #create directory for the local taxonomy db
 
 #this part initializes the database of the nodes and names used by Bio::DB::Taxonomy
 my ($nodefile,$namesfile) = ('nodes.dmp','names.dmp');
@@ -67,6 +68,8 @@ close WRITE;
 
 print "\nList of GI numbers associated with all taxa under $species have been printed to $species.gi_list\n";
 
+system "rm -rf ./index_tmp"; #delete tmp folder
+
 exit;
 
 
@@ -74,7 +77,7 @@ sub get_descendents#This subroutine recursively searches for taxids below the gi
 {
 
 my $taxonid = $_[0]; #receive the id of parent
-my $node = $db->get_Taxonomy_Node(-taxonid => $taxonid); #get the node object from the local taxonomy db in ./tmp
+my $node = $db->get_Taxonomy_Node(-taxonid => $taxonid); #get the node object from the local taxonomy db in ./index_tmp
 my @extant_children = $db->each_Descendent($node); # also possible to use the method get_all_Descendents
 
 if (@extant_children)	#checks if @extant_children is filled
