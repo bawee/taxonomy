@@ -4,8 +4,6 @@ names.dmp
 nodes.dmp
 scientific_names.dmp
 split_blast_tab_output.pl
-traverse_taxonomy.pl
-CDS.IPR.blastp_parser.py
 
 Nouri_leg/
 test_dump/
