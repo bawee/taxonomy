@@ -1,6 +1,6 @@
 #!/opt/local/bin/perl
 
-# This Script is used together with CDS.IPR.blastp_parser.py
+# This Script is used together with taxIDermy.py
 # Blast results that are used as imput for this program can be filtered (before running blast)  using a list of GIs ( retrieve_child_gis.pl )
 
 
@@ -33,6 +33,9 @@ my $refTaxID = $ARGV[0]; #query TaxID number (i.e. TaxID of organism that is use
 my $queryGI = $ARGV[1]; #query GI number (i.e. GI number from blast hit)
 
 
+#open LOG, ">>logfile.txt" or die$!; #uncomment to generate logfile for testing purposes. Also uncomment additional lines that start with "print LOG" below
+
+
 unless (scalar @ARGV == 2)	{
 print <<USAGE and die;
 	
@@ -56,6 +59,7 @@ if ($refTaxID eq "") {
 	print "No_result No_result No_result"; #checks for non-existant TaxIDs.
 	die "ERROR: Reference TaxID does not exist in the Protein databse. Could be nucleotide?\n";
 }
+
 
 while ( $refTaxID > 1 )	{ #keeps going until it reaches the root level i.e. TaxID = 1
 
@@ -81,7 +85,12 @@ while ( $refTaxID > 1 )	{ #keeps going until it reaches the root level i.e. TaxI
 	$refTaxIDHash{ "$refTaxID" } = "$level";
 	
 	$refTaxID = $parent; #assigns the parent TaxID for the next iteration.
-	
+
+        if ($refTaxID == 1)        {
+        unshift (@refTaxonomy, "root");
+        unshift (@refTaxIDHierachy, "$refTaxID:root:root");	
+	$refTaxIDHash{ "1" } = "root";
+	}
 	
 }
 
@@ -89,7 +98,7 @@ while ( $refTaxID > 1 )	{ #keeps going until it reaches the root level i.e. TaxI
 
 #print "For Reference: $refGI, the taxonomy is\n";
 #print join("\n", @refTaxonomy);
-#print join("\n", @refTaxIDHierachy), "\n";
+#print LOG join("\n", @refTaxIDHierachy), "\n";
 #print "$Taxonomy[0]";
 
 
@@ -113,20 +122,18 @@ $queryTaxon = get_name_or_taxid("$TaxID", "$Names_file", "3");
 
 while ( $TaxID > 1 )	{ #keeps going until it reaches the root level i.e. TaxID = 1
 
-if (exists($refTaxIDHash{$TaxID}))	{ #checks if Query TaxID exists in the Taxonomy of the reference
+#if (exists($refTaxIDHash{$TaxID}))	{ #checks if Query TaxID exists in the Taxonomy of the reference
 	
 	# Obtain the level name
-	my $level = get_name_or_taxid("$TaxID", "$Nodes_file", "5");
-	chomp $level;
+#	my $level = get_name_or_taxid("$TaxID", "$Nodes_file", "5");
+#	chomp $level;
 	#print $parent;
-	$Taxonomy[0] = $level; #this line catches instances when the GI number is the same as $lastCommonGroup.
-	$lastCommonGroup = $level;
-	
-	last;
-}
+#	$Taxonomy[0] = $level; #this line catches instances when the GI number is the same as $lastCommonGroup.
+#	$lastCommonGroup = $level;
+#	
+#	last;
+#}
 
-else	{
-	
 	#print $TaxID; #testing line
 	# Obtain the scientific name corresponding to a taxid
 	my $name = get_name_or_taxid("$TaxID", "$Names_file", "3");
@@ -148,22 +155,38 @@ else	{
 	unshift (@queryTaxIDHierachy, "$TaxID:$level:$name");
 	$TaxID = $parent; #assigns the parent TaxID for the next iteration.
 	
-	
-}
+	if ($TaxID == 1)	{
+	unshift (@Taxonomy, "root");
+        unshift (@queryTaxIDHierachy, "$TaxID:root:root");
+	}
+
+	if (exists($refTaxIDHash{$TaxID}))      { #checks if Query TaxID exists in the Taxonomy of the reference
+
+       		# Obtain the level name
+       		my $level = get_name_or_taxid("$TaxID", "$Nodes_file", "5");
+      	 	chomp $level;
+       		#print $parent;
+		$Taxonomy[0] = $level; #this line catches instances when the GI number is the same as $lastCommonGroup.
+	       	$lastCommonGroup = $level;
+
+        	last;
+	}
+
+
 }
 
 #Extra parts to print out the entire taxonomical hierarchy stored in an array for testing or viewing
 
-#print "For Query: $queryGI, the taxonomy is\n";
-#print join("\n", @Taxonomy), "\n";
-#print join("\n", @queryTaxIDHierachy), "\n";
+#print LOG "For Query: $queryGI, the taxonomy is\n";
+#print LOG join("\n", @Taxonomy), "\n";
+#print LOG join("\n", @queryTaxIDHierachy), "\n";
 #print "$Taxonomy[0]";
-#print "\n\nThe query is related to the reference at the : $lastCommonGroup level \n";
+#print LOG "\n\nThe query is related to the reference at the : $lastCommonGroup level \n";
 
 $queryTaxon =~ s/\s/_/g;
 $Taxonomy[0] =~ s/\s/_/g; #replaces spaces in "no rank" with an underscore
 $lastCommonGroup =~ s/\s/_/g; #replaces spaces in taxon tame with underscores
-print $lastCommonGroup , " ", $Taxonomy[0], " ", $queryTaxon; #This print the STDOUT that is received by the CDS.IPR.blastp_parser_v1.py
+print $lastCommonGroup , " ", $Taxonomy[0], " ", $queryTaxon; #This prints the STDOUT that is needed by taxIDermy.py
 
 sub get_name_or_taxid # Obtain the name corresponding to a taxid or the taxid of the parent taxa
 {
@@ -173,7 +196,7 @@ sub get_name_or_taxid # Obtain the name corresponding to a taxid or the taxid of
 }
 
 
-
+#close LOG; #closes logfile used for testing purposes
 exit
 
 

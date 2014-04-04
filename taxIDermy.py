@@ -1,6 +1,7 @@
 #!/usr/bin/env python2
 
 ####################################
+#Original interproscan parser Script by:
 # Simon Belluzzo		
 # s.belluzzo@student.unimelb.edu.au
 #
@@ -20,8 +21,11 @@
 #   1. Receives TaxID of reference instead of Gi number to feed into traverse taxonomy script
 #   2. Receives the name of the taxon level (e.g. species Legionell_pneumophila) and prints it to %level
 #
+#   Bryan Wee 04/04/2014
+#   1. Added root to colour dictionary
+#   2. Renamed script to taxIDermy.py
+#   
 # TESTED: By Bryan Wee
-# Usage: CDsearch_parser.py <CD search output file> <Corresponding genbank file> <CDS/IPR>
 # 
 #
 ####################################
@@ -77,12 +81,13 @@ def main():
         print """
 This script parses the output of NCBI's blastp to a format that can be then read as an entry into Artemis.
 
-Usage: CDS.IPR.blastp_parser.py <blastp_tab_output> <Corresponding genbank file>
+Usage: taxIDermy.py <blastp_tab_output> <Corresponding genbank file>
  
  """ 
         sys.exit(1) 
 
-    colours = {'no_rank':'201 31 22',
+    colours = {'root':'201 31 22',
+                'no_rank':'201 31 22',
                 'superkingdom':'217 88 14',
                 'phylum':'252 207 3',
                 'class':'206 213 0',
@@ -132,7 +137,7 @@ Usage: CDS.IPR.blastp_parser.py <blastp_tab_output> <Corresponding genbank file>
 
                 print '%s/note="%s hit to %s, %s, evalue %s, bitscore %s"' % (qlead, db, hit['acc'], hit['desc'], hit['evalue'], hit['score'])
                 
-                traverse_call = subprocess.Popen(["perl traverse_taxonomy_v1.pl "+ref_taxid+" "+hit['acc']], shell=True, stdout=subprocess.PIPE)
+                traverse_call = subprocess.Popen(["perl traverse_taxonomy.pl "+ref_taxid+" "+hit['acc']], shell=True, stdout=subprocess.PIPE)
                 results_string = traverse_call.communicate()[0]
                 results = results_string.split() #split the output of traverse_taxonomy.pl to 1.last commmon level and 2.taxa of level.
                 #print results
