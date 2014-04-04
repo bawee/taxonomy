@@ -2,12 +2,20 @@ TaxIDermy
 -----------------
 a set of scripts compiled by Bryan Wee (1st Aug 2012)
 
-This script produces an artemis readable genbank file that colours CDSs according according to their taxonomic distance from the reference species.
+This pipeline produces an artemis readable genbank file that colours CDSs according according to their taxonomic distance from the reference species.
 
 It facilitates annotation of genomic islands or mobile elements by differentiating regions that have different phylogenetic distances from the organism of interest.
 
 Updated: 28th Nov 2012
 
+
+Updates
+==========
+v0.1 - 28 Nov 2012
+Released on GitHub and tidied up
+
+v0.2 - 4 Apr 2014
+Fixed bug. Crashes when CDS hit is from Viruses
 
 Requirements
 ==============
