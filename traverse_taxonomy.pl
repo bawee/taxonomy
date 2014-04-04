@@ -122,17 +122,6 @@ $queryTaxon = get_name_or_taxid("$TaxID", "$Names_file", "3");
 
 while ( $TaxID > 1 )	{ #keeps going until it reaches the root level i.e. TaxID = 1
 
-#if (exists($refTaxIDHash{$TaxID}))	{ #checks if Query TaxID exists in the Taxonomy of the reference
-	
-	# Obtain the level name
-#	my $level = get_name_or_taxid("$TaxID", "$Nodes_file", "5");
-#	chomp $level;
-	#print $parent;
-#	$Taxonomy[0] = $level; #this line catches instances when the GI number is the same as $lastCommonGroup.
-#	$lastCommonGroup = $level;
-#	
-#	last;
-#}
 
 	#print $TaxID; #testing line
 	# Obtain the scientific name corresponding to a taxid
