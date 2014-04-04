@@ -51,8 +51,8 @@ Note: nr must be in your path. if not, point the -db argument to nr on your comp
 
 3. To create the final output, the following script needs to be run::
 
-	$ python CDS.IPR.blastp_parser.py <blastp output> <Genome genbank> <TaxID of reference> <output.file.with.colour>
-	$ python CDS.IPR.blastp_parser.py Pseudomonas.v.nr.blastp.tab Pseudomonas_PA14.gbk 446 > bryanscript.colour.out.tab
+	$ python taxIDermy.py <blastp output> <Genome genbank> <TaxID of reference> <output.file.with.colour>
+	Example: $ python taxIDermy.py Pseudomonas.v.nr.blastp.tab Pseudomonas_PA14.gbk 446 > bryanscript.colour.out.tab
 
 Note: this script calls traverse_taxonomy.pl which must be in the working directory
 
@@ -64,4 +64,4 @@ For use on a parallel cluster
 
 2. Prior to running blastp, split up the multi fasta (.faa) file (e.g. using genometools: gt splitfasta -numfiles 10 example.faa)
 
-3. Use sample PBS script (included) to run both blastp followed by CDS.IPR.blastp_parser.py on a cluster
+3. Use sample PBS script (included) to run both blastp followed by taxIDermy.py on a cluster
